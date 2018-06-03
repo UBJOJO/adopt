@@ -4,6 +4,7 @@
   "description": "* 유저 관리 (회원가입, 로그인, 아이디 찾기, 비밀번호 재설정)\r \t* 아이디, 비밀번호, 닉네임, 주소, 유저 등급, 현재 분양 갯수\r \t* id varchar(20), pw varchar(200), name varchar(30), level int, count int\r \t* 분양 테이블 -> 분양된 소화기 index, 분양한 사람 index\r * 지도 (소화기 아이콘이 각 위치에 배치되어있음)\r * 소화기 클릭시 소화기 정보 나오고 분양 신청 버튼\r * 신청 버튼 클릭시 동의서 받고 관리자 승인 대기\r * 날씨에 따라 사이트 오픈 여부",
   "main": "index.js",
   "scripts": {
+    "start": "supervisor index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

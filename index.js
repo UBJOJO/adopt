@@ -10,24 +10,30 @@ const connection = mysql.createConnection({
   password : 'root',
   database : 'adopt'
 })
-// connection.connect()
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.set('view engine', 'pug')
-// app.engine('pug', require('pug').__express)
 app.set('views', path.join(__dirname, 'public/views'))
 app.use(express.static(path.join(__dirname, 'public/views')))
 
 app.get('/', (req, res) => res.render('login'))
 app.post('/login', (req, res) => {
-  connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  const { id, pw } = req.body
+  connection.query(`SELECT * FROM users where id='${id}' and pw='${pw}'`, function (error, results, fields) {
     if (error) throw error
-    console.log('The solution is: ', results[0].solution)
-    console.log(req.body)
-    res.json({
-      hi: 'hello'
-    })
+    if (results.length === 0) {
+      return res.json({
+        status: false
+      })
+    } else {
+      const { name, level, count } = results[0]
+      return res.json({
+        name,
+        level,
+        count
+      })
+    }
   })
 })
 
